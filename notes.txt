@@ -1,43 +1,9 @@
-CRUD  Create Read  Upload  Delete
-
-Removing VENV
-    deactivate if running
-    rm -rf VENV
-    python3 -m venv venv
-    reactivate python with ***source venv/bin/activate
-    install flask in new venv ***pip3 install flask
-
-    one example of an editor Swagger Editor
-    YAML Yet another markup language
-
-flask looks for templates folder (lowercase) by default.
-
-
-
-    Sequence Diagram example:
-        Plantext
-
-        template preprocessor renders python output within template so that only html is outputed.
-
-        JINJA3 (https://jinja.palletsprojects.com/en/3.1.x/) minor changes between flask and python
-
-
-first template:
-base.html
-index.html
-
-
-CDN Content Deliver Network  (Faster loads)
-
-{{read only}} JINJA
-
-
 DJANGO
 Is a Python based web framework...(React is as JS based web framework)
-DJANGO is very structured, opinionated and strict versus Flask which is very flexible.
-DJANGO was originally designed to create a newspaper.
 
-REPL Read Evaluate Print Loop
+DJANGO is very structured, opinionated and strict versus Flask which is very flexible.
+
+DJANGO was originally designed to create a newspaper.
 
 django-admin startproject config .  
     config is the name we are choosing for the configuration file.
@@ -90,91 +56,97 @@ django-admin startproject config .
                             findstatic
                             runserver   #local server 127.0.0.1 port 8000
 
-    Subdirectories (Subfolders) to project directorys are called APPS.  If they have init files they are Modules.
-
-    Settings.py is the heart of your project.
-        Almost all variables are constants.
-
-        pathlab is a module as we are importing somthing and it is lowercase Path is capitalized and thus is a CLASS.
-
-            DEBUG = True  allows local hosting....False only lets it run on ALLOWED_HOSTS
-
-            ALLOWED_HOSTS = []
-
-    
-    INSTALLED APPS:
-        You have to MANUALLY install apps in the settings.py
-
-ROOT_URLCONF = 'config.urls'  #1st point for DJANGO to look for urs requests
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath('templates'))],
-
-**** Added "        str(   BASE_DIR.joinpath('templates')  )     "
-BASE_DIR is a Pathclass has access to method to append Templates
+            Subdirectories (Subfolders) to project directorys are called APPS.  If they have init files they are Modules.
 
 
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+settings.py
+                        settings.py is the heart of your project.
+                            Almost all variables are constants.
 
-tz timezone list.
+                            pathlab is a module as we are importing somthing and it is lowercase Path is capitalized and thus is a CLASS.
 
-https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+                                DEBUG = True  allows local hosting....False only lets it run on ALLOWED_HOSTS
 
+                                ALLOWED_HOSTS = []
 
-LANGUAGE_CODE = 'en-us'
+                        
+                    INSTALLED APPS:
+                        You have to MANUALLY install apps in the INSTALLED_APPS  list in settings.py
+                        for example...we added:
+                            'pages',      
+                        to that list.
 
-TIME_ZONE = 'UTC'  changed to local ...'America/Denver'
-#database timezone format.
+                    ROOT_URLCONF = 'config.urls'  #1st point for DJANGO to look for url requests
 
-USE_I18N = True
+                    TEMPLATES = [
+                        {
+                            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                            'DIRS': [str(BASE_DIR.joinpath('templates'))],
 
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]   #Every project will need this snippet
-STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
-
-                Added these to static files:
-
-                STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]     
-                                                        #Every project will need this snippet as it holds our files for the project
-                STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
-                                                        #holds static files for ours and django
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+                        We added:
+                                        str(   BASE_DIR.joinpath('templates')  )     
+                        BASE_DIR is a Pathclass that has access to the method to append Templates
 
 
-urls.py tells you how to generate subsequent url files later
-    don't use function views for the most part as Flask does that but the strongest way to use Django is to use class-based views
-    Flask is just a web framework but DJANGO is a working app out of the box.
+                     'APP_DIRS': True,
+                    'OPTIONS': {
+                                'context_processors': [
+                                    'django.template.context_processors.debug',
+                                    'django.template.context_processors.request',
+                                    'django.contrib.auth.context_processors.auth',
+                                    'django.contrib.messages.context_processors.messages',
+                                ],
+                            },
+                        },
+                    ]
 
-to run django server:
+                    WSGI_APPLICATION = 'config.wsgi.application'
+
+                    
+
+
+                    LANGUAGE_CODE = 'en-us'
+
+                    TIME_ZONE = 'UTC'  changed to local ...'America/Denver'
+                    #database timezone format.   https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+                    USE_I18N = True
+
+                    USE_TZ = True
+
+
+                    # Static files (CSS, JavaScript, Images)
+                    # https://docs.djangoproject.com/en/4.1/howto/static-files/
+
+                    STATIC_URL = 'static/'
+                    
+                    STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]   #Every project will need this snippet
+                    
+                    STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
+
+                            Added these to static files:
+
+                                    STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]     
+                                                                            #Every project will need this snippet as it holds our files for the project
+                                    STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
+                            #holds static files for ours and django
+
+                    # Default primary key field type
+                    # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+                    DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+urls.py 
+    tells you how to generate subsequent url files later
+    don't use function views for the most part as Flask does.
+    However, the strongest way to use Django is to use class-based views
+        Flask is just a web framework but DJANGO is a working app out of the box.
+
+Running a DJANGO server:
     python3 manage.py runserver
         expect some errors
-
-
-
 
 
 DJANGO's
@@ -183,6 +155,8 @@ MVT (Model View Template)
     views   Business Logic
     models
 MVC (Model View Controller)
+
+
 (ORM) Object Relational Mapper) translates between sql and python
                     ORM stands for Object-Relational Mapping, which is a programming technique used to interact with databases in an object-oriented way. With ORM programming, developers can use programming languages' native object-oriented constructs to interact with databases, rather than writing SQL queries directly.
 
@@ -190,7 +164,8 @@ MVC (Model View Controller)
 
                     Common ORM frameworks include Django's ORM, SQLAlchemy, and Hibernate. ORM programming can help simplify database interactions and make application development more efficient and maintainable.
 
-    MIGRATIONS scripts that ORM processes to create the tables/rows/etc.
+
+MIGRATIONS scripts that ORM (object relational mapping) processes to create the tables/rows/etc.
 
 Stop Server with CTRL-C
 
@@ -201,7 +176,8 @@ python3 manage.py migrate       #Migrates all the files to fix the error:
 
 Create a SUPERUSER
 python3 manage.py createsuperuser
-Test1234
+name: jamzz
+Test123 (maybe 4)
 
 Restart server:
     python3 manage.py runserver
@@ -214,22 +190,13 @@ Restart server:
 stop server
     python3 manage.py startapp pages #pages is the name we chose.
 
-Intruduct a view-class
-    TemplateView is the most basic view.  replace that in views.py
 
-    replace original with:
-
-    import django.views.generic import TemplateView
-
-    class HomePageView(TemplateView):
-        template_name = "home.html"
-
-            object oriented programming.  we are extending the templateview and adding our own differentiation with template_name.
-
-
-urlpatterns = [
+__pycache__.urls.py
+  
+    urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("pages.urls")),  #ALWAYS ADD TRAILING COMMA TO URL PATTERNS
+    path("", include("pages.urls")),  
+    #ALWAYS ADD TRAILING COMMA TO URL PATTERNS
 
     the recipe for any urls.py 
         from django.urls. import path
@@ -238,3 +205,123 @@ urlpatterns = [
         urlpatterns = [
             path ("", HomePageView.as_view(), name="home"),
         ]
+
+pages.views.py          Intruduce a view-class
+            TemplateView is the most basic view.  
+            
+            We replaced the original code with original with:
+
+                import django.views.generic import TemplateView
+
+        then added:
+                class HomePageView(TemplateView):    template_name = "home.html"
+
+                after that we added AboutPageView and more.
+
+                ***object oriented programming.  we are extending the templateview and adding our own differentiation with template_name.
+
+
+
+migrations.urls.py:
+
+    We added the following:
+
+            from django.urls import path
+            from .views import HomePageView, AboutPageView
+
+
+            urlpatterns = [
+                path ("", HomePageView.as_view(), name="home"),
+                path("about/", AboutPageView.as_view(), name="about"),
+            ]  
+        #ALWAYS ADD TRAILING COMMA TO URL PATTERNS
+
+Templates folder
+    create 1st tier folder named Templates:
+    Start with base.html file.  Use ! to begin.
+        
+        add 
+            {% block title %}{% endblock title %}
+         inside Title tag ***Watch out for autocorrect!***
+        
+        add bootstrap (if needed) code just before </head> and bootstrap script just before </body>
+
+        find a decent NAVBAR template and copypasta it just after <body>
+            edit the appropriate hrefs using JINJA tags and change the button names as needed.
+
+index.html
+
+
+
+
+
+
+REPL Read Evaluate Print Loop:
+    REPL stands for Read-Eval-Print Loop. It's a simple interactive programming environment where the user inputs code, the code is evaluated and the result is printed. It allows developers to test small pieces of code and get immediate feedback on their program's behavior. REPL is commonly used for prototyping, debugging, and experimenting with programming languages.
+
+        Example of REPL in action within python:
+
+                        >>> x = 2
+                        >>> y = 3
+                        >>> x + y
+                        5
+                        >>> name = "John"
+                        >>> print("Hello, " + name)
+                        Hello, John
+                        >>> nums = [1, 2, 3, 4, 5]
+                        >>> sum(nums)
+                        15
+                        >>> len(nums)
+                        5
+
+Removing VENV
+    deactivate if running
+    rm -rf VENV
+    python3 -m venv venv
+    reactivate python with ***source venv/bin/activate
+    install flask in new venv ***pip3 install flask
+
+    one example of an editor Swagger Editor
+    YAML Yet another markup language
+
+flask looks for templates folder (lowercase) by default.
+
+
+
+    Sequence Diagram example:
+        Plantext
+
+        template preprocessor renders python output within template so that only html is outputed.
+
+        JINJA3 (https://jinja.palletsprojects.com/en/3.1.x/) minor changes between flask and python
+
+
+{{read only}} JINJA
+
+
+CDN stands for Content Delivery Network. 
+
+        It's a network of geographically distributed servers that work together to deliver content to users faster and more efficiently. A CDN stores copies of content such as images, videos, and website files in multiple locations around the world, and when a user requests the content, the CDN delivers it from the server that is closest to the user, reducing latency and improving the user experience.
+
+        To use a CDN, you typically need to sign up with a CDN provider and configure your website or application to use the CDN. This involves specifying the URLs of the files you want to serve through the CDN, and updating the links and references in your web pages to point to the CDN URLs. The CDN provider will provide you with a URL or set of URLs that you can use to access the content, and they will handle the caching, replication, and delivery of the content to end users.
+
+        Using a CDN can help improve the performance and availability of your website or application, particularly for users who are located far away from your web server. It can also help reduce the load on your web server, by offloading the delivery of content to the CDN.
+
+
+
+
+
+CRUD  Create Read Upload  Delete:
+        It's a set of basic operations used in many software applications to manage data in databases.
+
+                Create: This operation is used to insert new data into a database. For example, when you create a new user account in a web application, the data is stored in a database.
+
+                Read: This operation is used to retrieve data from a database. For example, when you log into a web application, your user data is retrieved from a database and displayed on the screen.
+
+                Update: This operation is used to modify existing data in a database. For example, if you edit your user profile information in a web application, the changes are saved to the database using an update operation.
+
+                Delete: This operation is used to remove data from a database. For example, when you delete a post in a social media application, the post data is removed from the database using a delete operation.
+
+        To use CRUD operations, you typically interact with a database using some kind of database management tool, query language, or programming library. Many web frameworks and database systems provide built-in support for CRUD operations, making it easy to build applications that can create, read, update, and delete data.CRUD stands for Create, Read, Update, and Delete. It's a set of basic operations used in many software applications to manage data in databases.
+
+            
